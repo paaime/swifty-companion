@@ -13,7 +13,7 @@ import Toast from 'react-native-toast-message'
 import { useAuthStore } from 'src/store/store'
 
 export default function AppLayout() {
-  const { checkValidToken } = useAuthStore()
+  const { signIn } = useAuthStore()
   const [fontsLoaded] = useFonts({
     Urbanist: Urbanist_400Regular,
     Urbanist_Bold: Urbanist_700Bold,
@@ -21,7 +21,7 @@ export default function AppLayout() {
   })
 
   useEffect(() => {
-    checkValidToken()
+    signIn()
   }, [])
 
   if (!fontsLoaded) return null
