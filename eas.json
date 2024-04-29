@@ -6,6 +6,11 @@
       "ios": {
         "simulator": true
       }
+    },
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
     }
   }
 }
