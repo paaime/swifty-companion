@@ -11,7 +11,7 @@ import { router } from 'expo-router'
 import Toast from 'react-native-toast-message'
 import useAxiosPrivate from 'src/utils/axios'
 import Spinner from 'src/components/Spinner'
-import RNPickerSelect from 'react-native-picker-select'
+import { Picker } from '@react-native-picker/picker'
 
 export default function SecondScreen() {
   // Hooks
@@ -56,22 +56,18 @@ export default function SecondScreen() {
         <S.Content showsVerticalScrollIndicator={false}>
           {cursus && <Header user={user} cursus={cursus} />}
           <S.Cursus>Cursus</S.Cursus>
-          <RNPickerSelect
-            style={{
-              inputIOS: {
-                color: 'white',
-                fontFamily: 'Urbanist',
-                fontSize: 16
-              }
-            }}
-            placeholder={{ label: 'Select a cursus', value: null }}
-            value={cursus?.cursus.name}
+          <Picker
+            selectedValue={cursus?.cursus.name}
             onValueChange={(value) => setCursus(user.cursus_users.find((cursus) => cursus.cursus.name === value))}
-            Icon={() => <AntDesign name="down" size={16} color="white" />}
-            items={user.cursus_users.map((cursus) => {
-              return { label: cursus.cursus.name, value: cursus.cursus.name }
+            style={{
+              color: 'white',
+              fontFamily: 'Urbanist',
+              fontSize: 16
+            }}>
+            {user?.cursus_users?.map((cursus) => {
+              return <Picker.Item key={cursus.cursus.name} label={cursus.cursus.name} value={cursus.cursus.name} />
             })}
-          />
+          </Picker>
           <S.ButtonWrapper>
             <S.Button onPress={() => setActiveTab('skills')} style={activeTab === 'skills' && { backgroundColor: '#232627' }}>
               <S.ButtonText style={activeTab === 'skills' && { color: 'white' }}>Skills</S.ButtonText>
